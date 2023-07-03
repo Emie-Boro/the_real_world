@@ -6,6 +6,7 @@ const dotenv = require('dotenv')
 const exphbs = require('express-handlebars')
 const connectDB = require('./config/db')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 const nodemailer = require('nodemailer')
 
 
@@ -35,6 +36,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
+app.use(methodOverride('_method'))
+
+
 app.engine('.hbs', exphbs.engine({
     defaultLayout:"main", extname:'.hbs'
 }))
@@ -63,11 +67,16 @@ app.post('/', async (req,res)=>{
     }).save()
 
     res.render('success')
+    
 })
 
+app.delete('/:id', async (req,res) =>{
+    await Formdata.deleteOne({_id:req.params.id})
+    res.redirect(process.env.formUrl)
+})
 app.get(process.env.formUrl, async (req,res) =>{
     const formdata = await Formdata.find({}).lean()
 
     res.render('data', {formdata})
 })
-app.listen(8080, console.log('Server connected ...'))
+app.listen(process.env.PORT, console.log('Server connected ...'))
