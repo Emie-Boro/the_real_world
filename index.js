@@ -7,7 +7,7 @@ const connectDB = require('./config/db')
 const bodyParser = require('body-parser')
 const nodemailer = require('nodemailer')
 
-dotenv.config({path: './config/config.env'})
+// dotenv.config({path: './config/config.env'})
 
 connectDB()
 
