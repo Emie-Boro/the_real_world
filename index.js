@@ -84,7 +84,7 @@ app.post('/', async (req,res)=>{
 })
 
 app.get(process.env.formUrl, async (req,res) =>{
-    const formdata = await Formdata.find().lean()
+    const formdata = await Formdata.find({}).lean()
 
     res.render('data', {formdata})
 })
