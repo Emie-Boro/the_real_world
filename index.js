@@ -62,9 +62,7 @@ app.post('/', async (req,res)=>{
         partnership:req.body.partnership
     }).save()
 
-    res.render('index',{
-        msg:'Submitted Successfully'
-    })
+    res.render('success')
 })
 
 app.get(process.env.formUrl, async (req,res) =>{
