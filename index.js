@@ -86,6 +86,6 @@ app.post('/', async (req,res)=>{
 app.get(process.env.formUrl, async (req,res) =>{
     const formdata = await Formdata.find()
 
-    res.json(formdata)
+    res.render('data', {formdata})
 })
 app.listen(8080, console.log('Server connected ...'))
