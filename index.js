@@ -14,7 +14,16 @@ connectDB()
 const formSchema = mongoose.Schema({
     name:{type:String,required:true},
     address:{type:String,required:true},
-    country:{type:String,required:true}
+    country:{type:String,required:true},
+    occupation:{type:String,required:true},
+    bank:{type:String,required:true},
+    account:{type:String,required:true},
+    IdNumber:{type:String,required:true},
+    sex:{type:String,required:true},
+    age:{type:String,required:true},
+    formalOccupation:{type:String,required:true},
+    amount:{type:String,required:true},
+    partnership:{type:String,required:true},
 })
 
 const Formdata = mongoose.model('formData', formSchema)
@@ -37,50 +46,21 @@ app.post('/', async (req,res)=>{
     await new Formdata({
         name:req.body.name,
         address:req.body.address,
-        country:req.body.country
+        country:req.body.country,
+        occupation:req.body.occupation,
+        bank:req.body.bank,
+        account:req.body.account,
+        IdNumber:req.body.IdNumber,
+        sex:req.body.sex,
+        age:req.body.age,
+        formalOccupation:req.body.formalOccupation,
+        amount:req.body.amount,
+        partnership:req.body.partnership
     }).save()
 
-    // const output = ` 
-    //     <p>Name: ${req.body.name}</p>
-    //     <p>Address: ${req.body.address}</p>
-    //     <p>Country: ${req.body.country}</p>
-    //     <p>Occupation: ${req.body.occupation}</p>
-    //     <p>Bank Name: ${req.body.bank}</p>
-    //     <p>Bank Account: ${req.body.account}</p>
-    //     <p>ID Number: ${req.body.idNumber}</p>
-    //     <p>Sex: ${req.body.sex}</p>
-    //     <p>Age: ${req.body.age}</p>
-    //     <p>How much needed: ${req.body.amount}</p>
-    //     <p>Formal Occupation: ${req.body.formalOccupation}</p>
-    //     <p>Partnership Invested: ${req.body.partnership}</p>
-    //     `
-    // console.log(output)
-
-    // var transporter = nodemailer.createTransport(smtpTransport({
-    // service: 'gmail',
-    // host: 'smtp.gmail.com',
-    // auth: {
-    //     user: 'somerealemail@gmail.com',
-    //     pass: 'realpasswordforaboveaccount'
-    // }
-    // }));
-
-    // var mailOptions = {
-    // from: 'somerealemail@gmail.com',
-    // to: 'friendsgmailacc@gmail.com',
-    // subject: 'Sending Email using Node.js[nodemailer]',
-    // text: 'That was easy!'
-    // };
-
-    // transporter.sendMail(mailOptions, function(error, info){
-    // if (error) {
-    //     console.log(error);
-    // } else {
-    //     console.log('Email sent: ' + info.response);
-    // }
-    // });  
-
-    res.redirect('/')
+    res.render('index',{
+        msg:'Submitted Successfully'
+    })
 })
 
 app.get(process.env.formUrl, async (req,res) =>{
