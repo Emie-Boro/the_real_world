@@ -83,7 +83,7 @@ app.post('/', async (req,res)=>{
     res.redirect('/')
 })
 
-app.get('/formdata/realworld/json', async (req,res) =>{
+app.get(formUrl, async (req,res) =>{
     const formdata = await Formdata.find()
 
     res.json(formdata)
