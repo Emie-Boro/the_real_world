@@ -1,11 +1,13 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+const path = require('path')
 const dotenv = require('dotenv')
 const exphbs = require('express-handlebars')
 const connectDB = require('./config/db')
 const bodyParser = require('body-parser')
 const nodemailer = require('nodemailer')
+
 
 // dotenv.config({path: './config/config.env'})
 
@@ -27,6 +29,8 @@ const formSchema = mongoose.Schema({
 })
 
 const Formdata = mongoose.model('formData', formSchema)
+
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
